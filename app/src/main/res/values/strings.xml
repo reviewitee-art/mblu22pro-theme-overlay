@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">mblu 22 Pro HyperOS Theme</string>
+    <string name="accessibility_service_label">mblu 22 Pro iOS 18 / HyperOS System UI</string>
+    <string name="accessibility_service_description">Kích hoạt giao diện Trung tâm điều khiển (Control Center), Dynamic Island quanh camera đục lỗ, Thanh trạng thái, Thanh âm lượng nổi và Hiệu ứng sạc pin chuẩn iOS 18 / HyperOS cho Meizu mblu 22 Pro (Không cần Root).</string>
+</resources>
