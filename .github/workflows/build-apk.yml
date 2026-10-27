@@ -1,0 +1,48 @@
+name: Build Meizu mblu 22 Pro Theme APK
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-apk:
+    name: Build iOS 18 & HyperOS System Overlay APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+
+      - name: Build Debug & Signed Release APK
+        run: gradle assembleDebug assembleRelease --no-daemon --stacktrace
+
+      - name: Rename APK for Meizu mblu 22 Pro
+        run: |
+          mkdir -p output-apk
+          cp app/build/outputs/apk/debug/app-debug.apk output-apk/Meizu-mblu22Pro-iOS18-HyperOS-Theme-Debug.apk
+          cp app/build/outputs/apk/release/app-release.apk output-apk/Meizu-mblu22Pro-iOS18-HyperOS-Theme-Release.apk
+
+      - name: Upload APK Artifact (Bấm vào đây để tải APK)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Meizu-mblu22Pro-Theme-APK
+          path: output-apk/*.apk
+          if-no-files-found: error
+          retention-days: 90
